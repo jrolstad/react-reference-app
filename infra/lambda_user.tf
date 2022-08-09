@@ -3,8 +3,7 @@ resource "aws_lambda_function" "api_user" {
 
   role = aws_iam_role.lambda_exec.arn
 
-  image_uri    = "${aws_ecr_repository.registry.repository_url}:health_api-${var.container_image_id}"
-  package_type = "Image"
+  package_type = "Zip"
   
 }
 
