@@ -61,7 +61,7 @@ resource "aws_cloudwatch_log_group" "api_gw" {
   retention_in_days = 30
 }
 
-esource "aws_s3_bucket" "artifacts" {
+resource "aws_s3_bucket" "artifacts" {
     bucket = replace("${local.service_name}artifacts","_","")
     acl = "private"
     versioning {
