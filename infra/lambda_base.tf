@@ -63,12 +63,16 @@ resource "aws_cloudwatch_log_group" "api_gw" {
 
 resource "aws_s3_bucket" "artifacts" {
     bucket = replace("${local.service_name}artifacts","_","")
-    versioning {
-        enabled = true
-    }
 }
 
 resource "aws_s3_bucket_acl" "artifacts" {
   bucket = aws_s3_bucket.artifacts.id
   acl    = "private"
+}
+
+resource "aws_s3_bucket_versioning" "artifacts" {
+  bucket = aws_s3_bucket.artifacts.id
+  versioning_configuration {
+    status = "Enabled"
+  }
 }

@@ -1,5 +1,5 @@
 resource "aws_s3_bucket_object" "artifact_api_user" {
-    bucket = "${aws_s3_bucket.artifacts.bucket}"
+    bucket = aws_s3_bucket.artifacts.id
     key = "api_user.zip"
     source = "../api/cmd/user/bin/lambda.zip"
     etag = "${md5(file("../api/cmd/user/bin/lambda.zip"))}"
