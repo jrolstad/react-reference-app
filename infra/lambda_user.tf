@@ -1,6 +1,6 @@
 resource "local_file" "artifact_api_user" {
     source  = "../api/cmd/user/bin/lambda.zip"
-    filename = "api_user.zip"
+    filename = "../api/cmd/user/bin/lambda.zip"
 }
 
 resource "aws_s3_bucket_object" "artifact_api_user" {
