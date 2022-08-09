@@ -63,8 +63,12 @@ resource "aws_cloudwatch_log_group" "api_gw" {
 
 resource "aws_s3_bucket" "artifacts" {
     bucket = replace("${local.service_name}artifacts","_","")
-    acl = "private"
     versioning {
         enabled = true
     }
+}
+
+resource "aws_s3_bucket_acl" "artifacts" {
+  bucket = aws_s3_bucket.artifacts.id
+  acl    = "private"
 }
