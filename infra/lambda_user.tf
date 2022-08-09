@@ -5,6 +5,7 @@ resource "aws_lambda_function" "api_user" {
 
   package_type = "Zip"
   runtime="go1.x"
+  handler = "lambda"
   
 }
 
