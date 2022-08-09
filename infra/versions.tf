@@ -17,8 +17,8 @@ terraform {
   required_version = "~> 1.0"
 
   backend "s3" {
-    bucket = "engineeringsignalcollectortfstate"
-    key    = "engineeringsignalcollector/terraform.tfstate"
+    bucket = "erolstadreactreferenceapptfstate"
+    key    = "rolstadreactreferenceapp/terraform.tfstate"
     region = "us-west-1"
   }
 }
