@@ -1,6 +1,5 @@
 resource "aws_s3_bucket" "client_app" {
   bucket = replace("${local.service_name}client","_","")
-  acl    = "public-read"
 }
 
 resource "aws_s3_bucket_website_configuration" "client_app" {
