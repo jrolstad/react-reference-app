@@ -7,7 +7,7 @@ resource "aws_s3_bucket_object" "artifact_api_user" {
     bucket = aws_s3_bucket.artifacts.id
     key = local_file.artifact_api_user.filename
     source = local_file.artifact_api_user.filename
-    etag = "${md5(file("${local_file.artifact_api_user.filename}"))}"
+    etag = "${md5("${local_file.artifact_api_user.content_base64}")}"
 }
 
 resource "aws_lambda_function" "api_user" {
