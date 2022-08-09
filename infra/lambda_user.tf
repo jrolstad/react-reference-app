@@ -4,6 +4,7 @@ resource "aws_lambda_function" "api_user" {
   role = aws_iam_role.lambda_exec.arn
 
   package_type = "Zip"
+  runtime="go1.x"
   
 }
 
