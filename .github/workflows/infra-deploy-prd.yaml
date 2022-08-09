@@ -18,6 +18,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      
+      - name: Build User API
+        run: GOOS=linux go build -o bin/lambda
+        working-directory: ./api/cmd/api/user
+
+      - name: Zip User API
+        run: zip lambda.zip lambda
+        working-directory: ./api/cmd/api/user/bin
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1

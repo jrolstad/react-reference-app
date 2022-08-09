@@ -1,3 +1,10 @@
+resource "aws_s3_bucket_object" "artifact_api_user" {
+    bucket = "${aws_s3_bucket.artifacts.bucket}"
+    key = "api_user.zip"
+    source = "../api/cmd/user/bin/lambda.zip"
+    etag = "${md5(file("../api/cmd/user/bin/lambda.zip"))}"
+}
+
 resource "aws_lambda_function" "api_user" {
   function_name = "${local.service_name}_api_user"
 
@@ -6,6 +13,10 @@ resource "aws_lambda_function" "api_user" {
   package_type = "Zip"
   runtime="go1.x"
   handler = "lambda"
+
+  s3_bucket = aws_s3_bucket.api_source.bucket
+  s3_key = "${aws_s3_bucket_object.artifact_api_user.key}"
+  s3_object_version = "${aws_s3_bucket_object.artifact_api_user.version_id}"
   
 }
 
