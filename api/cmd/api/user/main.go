@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	runtime "github.com/aws/aws-lambda-go/lambda"
+	"github.com/jrolstad/react-reference-app/internal/core"
+	"github.com/jrolstad/react-reference-app/internal/models"
 )
 
 func init() {
@@ -16,14 +18,11 @@ func main() {
 }
 
 func handleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	userName := resolveUser(request.RequestContext.Identity.User)
-	return events.APIGatewayProxyResponse{StatusCode: 200, Body: userName}, nil
-}
-
-func resolveUser(requestUser string) string {
-	if requestUser == "" {
-		return "I dont know who you are"
+	userData := &models.User{
+		Name:            request.RequestContext.Identity.User,
+		IsAuthenticated: request.RequestContext.Identity.User != "",
 	}
+	jsonResult := core.MapToJson(userData)
 
-	return requestUser
+	return events.APIGatewayProxyResponse{StatusCode: 200, Body: jsonResult}, nil
 }
